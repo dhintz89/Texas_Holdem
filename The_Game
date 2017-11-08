@@ -1,0 +1,69 @@
+function drawCard() {
+    var ranCardNum = Math.floor(Math.random()*14+1);
+    var ranCardSuit = Math.floor(Math.random()*4+1);
+    let cardNumber;
+    let cardSuit;
+    if(ranCardNum === 14) {
+        cardNumber = 'Ace';
+    } else if(ranCardNum === 13) {
+        cardNumber = 'King';
+    } else if(ranCardNum === 12) {
+        cardNumber = 'Queen';
+    } else if(ranCardNum === 11) {
+        cardNumber = 'Jack';
+    } else {
+        cardNumber = ranCardNum;
+    }
+    if(ranCardSuit === 4) {
+        cardSuit = 'Hearts';
+    } else if(ranCardSuit === 3) {
+        cardSuit = 'Spades';
+    } else if(ranCardSuit === 2) {
+        cardSuit = 'Diamonds';
+    } else if(ranCardSuit === 1) {
+        cardSuit = 'Clubs';
+    } else {
+        cardSuit = 'Invalid Suit';
+    }
+    console.log(cardNumber + ' of ' + cardSuit);
+}
+
+function dealDraw(playerCount) {
+    var player = 1;
+    for(player = 1; player <= playerCount; player++) {
+	    console.log(' ');
+    	console.log(`Player ${player}:`);
+        var i = 0;
+        for(i = 0; i<2; i++) {
+            drawCard();
+        }
+    }
+}
+
+function flopDraw() {
+    console.log(' ');
+    console.log('Cards drawn on Flop:');
+    var i = 0;
+    for(i = 0; i < 3; i++) {
+        drawCard();
+    }
+}
+
+function riverDraw() {
+    console.log(' ');
+    console.log('Cards drawn on River:');
+    drawCard();
+}
+
+function finalDraw() {
+    console.log(' ');
+    console.log('Final card:');
+    drawCard();
+}
+
+function texasHoldEm (playerCount) {
+    dealDraw(playerCount);
+    flopDraw();
+    riverDraw();
+    finalDraw();
+}
