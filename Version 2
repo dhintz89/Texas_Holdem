@@ -1,0 +1,81 @@
+//First, Define Deck
+var cardsInDeck;
+
+//build array of all cards
+function populateDeck() {
+  cardsInDeck = [];
+  for(i=1;i<10;i++) {
+    cardsInDeck.push(`${i} of Clubs`);
+    cardsInDeck.push(`${i} of Diamonds`);
+    cardsInDeck.push(`${i} of Spades`);
+    cardsInDeck.push(`${i} of Hearts`);
+  }
+  cardsInDeck.push('Jack of Clubs','Queen of Clubs','King of Clubs','Ace of Clubs');
+  cardsInDeck.push('Jack of Diamonds','Queen of Diamonds','King of Diamonds','Ace of Diamonds');
+  cardsInDeck.push('Jack of Spades','Queen of Spades','King of Spades','Ace of Spades');
+  cardsInDeck.push('Jack of Hearts','Queen of Hearts','King of Hearts','Ace of Hearts');
+}
+
+//drawCard function to pull random card from array and remove from array of remaining cards
+function drawCard() {
+  var ranNum = Math.floor(Math.random()*cardsInDeck.length)
+  var yourCard = cardsInDeck[ranNum];
+  if(cardsInDeck.length>0) {
+    console.log(yourCard);
+    cardsInDeck.splice((ranNum),1);
+  } else {
+    console.log("Out of cards");
+  }
+}
+
+//Initial Deal - 2 cards per player
+function dealDraw(playerCount) {
+    var player = 1;
+    for(player = 1; player <= playerCount; player++) {
+	    console.log(' ');
+    	console.log(`Player ${player}:`);
+        var i = 0;
+        for(i = 0; i<2; i++) {
+            drawCard();
+        }
+    }
+}
+
+//Deal the Flop - first 3 communal cards
+function flopDraw() {
+    console.log(' ');
+    console.log('Cards drawn on Flop:');
+    var i = 0;
+    for(i = 0; i < 3; i++) {
+        drawCard();
+    }
+}
+
+//Deal the River - second round of communal cards - one card
+function riverDraw() {
+    console.log(' ');
+    console.log('Cards drawn on River:');
+    drawCard();
+}
+
+//Deal Final Card - final communal card of game
+function finalDraw() {
+    console.log(' ');
+    console.log('Final card:');
+    drawCard();
+}
+
+//Ending Game needs to re-build Deck for next round
+function endGame() {
+  populateDeck();
+}
+
+//Run Full Game
+function texasHoldEm (playerCount) {
+    populateDeck();
+    dealDraw(playerCount);
+    flopDraw();
+    riverDraw();
+    finalDraw();
+    endGame();
+}
